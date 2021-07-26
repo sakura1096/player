@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="referrer" content="never">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title>player</title>
+    <script src="//cdn.staticfile.org/hls.js/0.10.1/hls.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+    <style>body,html,.artplayer-app{padding:0;margin:0;width:100%;height:100%;background-color:#000}a{text-decoration:none}</style>
+</head>
+<body>
+<div class="artplayer-app" id="artplayer-app"></div>
+<script type="text/javascript" charset="utf-8">
+    var vurl = window.location.href.split("url=")[1];
+    var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url: vurl,
+    fullscreenWeb: true,
+    fullscreen: true,
+    customType: {
+        m3u8: function (video, url) {
+            var hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        },
+    },
+   whitelist: ['*'],
+});
+</script>
+</body>
+</html>
